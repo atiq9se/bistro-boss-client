@@ -15,6 +15,7 @@ const Home = () => {
             <PopularMenu></PopularMenu>
             <Featured></Featured>
             <Testimonials></Testimonials>
+            
         </div>
     );
 };

@@ -5,8 +5,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import { useEffect, useState } from "react";
+import { Rating } from "@smastrom/react-rating";
 
 const Testimonials = () => {
+    const [reviews, setReviews] = useState([])
+
+    useEffect(() => {
+        fetch('reviews.json')
+            .then(res => res.json())
+            .then(data => setReviews(data))
+    }, [])
     return (
         <div className="my-20">
             <SectionTitle
@@ -18,7 +27,21 @@ const Testimonials = () => {
                 <SwiperSlide>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae et exercitationem obcaecati vitae voluptate? Odio impedit tenetur itaque iste laboriosam quasi, fugit adipisci eum. Eius magni voluptatum ratione explicabo accusantium.</SwiperSlide>
                 <SwiperSlide>Slide 3</SwiperSlide>
                 <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
+
+
+                {
+                    reviews.map(review => <SwiperSlide key={reviews._id}>
+                        <div className="m-24">
+                            <Rating
+                                style={{ maxWidth: 180 }}
+                                value={review.rating}
+                                readOnly
+                            />
+                            <p>{review.details}</p>
+                            <h3>{review.name}</h3>
+                        </div>
+                    </SwiperSlide>)
+                }
             </Swiper>
         </div>
     );
