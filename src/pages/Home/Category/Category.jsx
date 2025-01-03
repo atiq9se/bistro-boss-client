@@ -9,7 +9,7 @@ import cSlider2 from '../../../assets/home/slide2.jpg'
 import cSlider3 from '../../../assets/home/slide3.jpg'
 import cSlider4 from '../../../assets/home/slide4.jpg'
 import cSlider5 from '../../../assets/home/slide5.jpg'
-import SectionTitle from '../../../assets/components/SectionTitle/SectionTitle';
+import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 
 const Category = () => {
     return (
