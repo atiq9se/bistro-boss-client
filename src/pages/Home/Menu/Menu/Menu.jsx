@@ -8,6 +8,7 @@ const Menu = () => {
             <Helmet>
                 <title>Hello World</title>
             </Helmet>
+            
             <Cover img={menuImg} title="our menu"></Cover>
         </div>
     );
