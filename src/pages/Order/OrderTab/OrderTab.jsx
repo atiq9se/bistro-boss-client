@@ -16,7 +16,7 @@ const OrderTab = ({ items }) => {
         },
     };
     return (
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
+        <div className="">
 
 
             <Swiper
