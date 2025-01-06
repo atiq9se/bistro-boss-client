@@ -1,27 +1,36 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import AuthProvider from '../../provider/AuthProvider';
 
 const Login = () => {
     const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
 
-    useEffect(()=>{
-        loadCaptchaEnginge(6); 
+    const { signIn } = useContext(AuthProvider)
+
+    useEffect(() => {
+        loadCaptchaEnginge(6);
     }, [])
 
-    const handleLogin = event =>{
+    const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const pass = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
     }
-    const handleValidateCaptcha = e=>{
-          const user_captcha_value = captchaRef.current.value;
-          if(validateCaptcha(user_captcha_value)){
+
+    const handleValidateCaptcha = e => {
+        const user_captcha_value = captchaRef.current.value;
+        if (validateCaptcha(user_captcha_value)) {
             setDisabled(false);
-          }else{
+        } else {
             setDisabled(true)
-          }
+        }
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -52,7 +61,7 @@ const Login = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                 <LoadCanvasTemplate />
+                                <LoadCanvasTemplate />
                             </label>
                             <input type="text" ref={captchaRef} placeholder="Type the text above" className="input input-bordered" required />
                             <button onClick={handleValidateCaptcha} className='btn btn-outline btn-xs mt-2'>Validate</button>
