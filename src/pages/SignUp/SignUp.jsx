@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../provider/AuthProvider';
+import { Link } from "react-router-dom";
 
 
 const SignUp = () => {
@@ -62,6 +63,7 @@ const SignUp = () => {
                             <input type="submit" className="btn btn-primary" value="Sign Up"/>
                         </div>
                     </form>
+                    <p>already register? <Link to='/login'>Sign In</Link></p>
                 </div>
             </div>
         </div>
