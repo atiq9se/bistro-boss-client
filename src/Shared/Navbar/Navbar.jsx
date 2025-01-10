@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { CiShoppingCart } from "react-icons/ci";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
+    const [cart] = useCart();
 
     const handleSignOut = () => {
         logOut()
@@ -19,7 +21,7 @@ const Navbar = () => {
         <li><Link to='/secret'>Secret</Link></li>
         <li><button className="btn">
             <CiShoppingCart />
-            <div className="badge badge-secondary">+9</div>
+            <div className="badge badge-secondary">{cart.length}</div>
         </button></li>
         {
             user ? <><span>{user?.displayName}</span><img src={user.photoURL} alt="" className="w-12" /><button onClick={handleSignOut}>LOGOUT</button></> : <><li><Link to='/login'>Login</Link></li></>
