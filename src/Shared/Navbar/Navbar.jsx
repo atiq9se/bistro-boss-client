@@ -20,10 +20,14 @@ const Navbar = () => {
         <li><Link to='/menu'>Our Menu</Link></li>
         <li><Link to='/order/salad'>Order Food</Link></li>
         <li><Link to='/secret'>Secret</Link></li>
-        <li><button className="btn">
-            <CiShoppingCart />
-            <div className="badge badge-secondary">{cart.length}</div>
-        </button></li>
+        <li>
+            <Link to="/dashboard/cart">
+                <button className="btn">
+                    <CiShoppingCart />
+                    <div className="badge badge-secondary">{cart.length}</div>
+                </button>
+            </Link>
+        </li>
         {
             user ? <><span>{user?.displayName}</span><img src={user.photoURL} alt="" className="w-12" /><button onClick={handleSignOut}>LOGOUT</button></> : <><li><Link to='/login'>Login</Link></li></>
         }
