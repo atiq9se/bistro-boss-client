@@ -1,23 +1,28 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import { CiShoppingCart } from "react-icons/ci";
 
 const Navbar = () => {
-    const {user, logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
 
-    const handleSignOut =()=>{
+    const handleSignOut = () => {
         logOut()
-        .then(()=>{})
-        .catch(errors=>console.log(errors))  
-     }
+            .then(() => { })
+            .catch(errors => console.log(errors))
+    }
 
     const navOptions = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/menu'>Our Menu</Link></li>
         <li><Link to='/order/salad'>Order Food</Link></li>
         <li><Link to='/secret'>Secret</Link></li>
+        <li><button className="btn">
+            <CiShoppingCart />
+            <div className="badge badge-secondary">+9</div>
+        </button></li>
         {
-            user ? <><button onClick={handleSignOut}>LOGOUT</button></>: <><li><Link to='/login'>Login</Link></li></>
+            user ? <><span>{user?.displayName}</span><img src={user.photoURL} alt="" className="w-12" /><button onClick={handleSignOut}>LOGOUT</button></> : <><li><Link to='/login'>Login</Link></li></>
         }
     </>
 
@@ -43,7 +48,7 @@ const Navbar = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                         {navOptions}
+                        {navOptions}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">daisyUI</a>

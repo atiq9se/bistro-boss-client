@@ -6,38 +6,37 @@ import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-    const { register, handleSubmit, reset formState: { errors } } = useForm()
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { register, handleSubmit, reset, formState: { errors } } = useForm()
+    const { createUser, updateUserProfile, logOut } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
+        console.log(data);
+
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
+
                 updateUserProfile(data.name, data.photo)
-                    .then(() => {
-                        reset();
-                        Swal.fire({
-                            title: "User login successfully",
-                            showClass: {
-                                popup: `
-                                        animate__animated
-                                        animate__fadeInUp
-                                        animate__faster
-                                      `
-                            },
-                            hideClass: {
-                                popup: `
-                                        animate__animated
-                                        animate__fadeOutDown
-                                        animate__faster
-                                      `
-                            }
-                        });
-                        navigate('/');
-                    })
-                    .catch(error => console.log(error))
+                .then(() => {
+                    reset();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "User update successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                      navigate('/');
+
+                    //   logOut()
+                    //   .then(()=>{
+                    //     navigate('/');
+                    //   })
+                    
+                })
+                .catch(error => console.log(error))
             })
     }
 
