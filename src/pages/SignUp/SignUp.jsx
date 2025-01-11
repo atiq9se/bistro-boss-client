@@ -3,9 +3,12 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../../provider/AuthProvider';
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
     const { createUser, updateUserProfile, logOut } = useContext(AuthContext)
     const navigate = useNavigate();
@@ -20,20 +23,31 @@ const SignUp = () => {
 
                 updateUserProfile(data.name, data.photo)
                 .then(() => {
-                    reset();
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "User update successfully",
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                      navigate('/');
-
-                    //   logOut()
-                    //   .then(()=>{
-                    //     navigate('/');
-                    //   })
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email
+                    }
+                    axiosPublic.post('/users', userInfo)
+                    .then(res=>{
+                        if(res.data.insertedId){
+                            console.log('user added to the database')
+                            reset();
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "User update successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                              });
+                              navigate('/');
+        
+                            //   logOut()
+                            //   .then(()=>{
+                            //     navigate('/');
+                            //   })
+                        }
+                    })
+                   
                     
                 })
                 .catch(error => console.log(error))
@@ -94,7 +108,8 @@ const SignUp = () => {
                             <input type="submit" className="btn btn-primary" value="Sign Up" />
                         </div>
                     </form>
-                    <p>already register? <Link to='/login'>Sign In</Link></p>
+                    <p className="p-4">already register? <Link to='/login'>Sign In</Link></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
