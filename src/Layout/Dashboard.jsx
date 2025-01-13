@@ -4,6 +4,9 @@ import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
     const [cart] = useCart();
+    
+    
+
     return (
         <div className="flex">
             <div className="w-64 min-h-full bg-orange-400">
