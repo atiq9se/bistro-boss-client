@@ -4,6 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { CiShoppingCart } from "react-icons/ci";
 import useCart from "../../hooks/useCart";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -11,7 +12,25 @@ const Navbar = () => {
 
     const handleSignOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => { 
+                Swal.fire({
+                    title: "User Logout successfully",
+                    showClass: {
+                      popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                      `
+                    },
+                    hideClass: {
+                      popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                      `
+                    }
+                  });
+            })
             .catch(errors => console.log(errors))
     }
 

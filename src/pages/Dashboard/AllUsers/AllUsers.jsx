@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaUsers } from "react-icons/fa";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -81,7 +81,7 @@ const AllUsers = () => {
                                     <th>{index + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.role === 'admin' ? 'Admin':<button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600"></FaTrashAlt></button>}
+                                    <td>{user.role === 'admin' ? 'Admin':<button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost btn-xs"><FaUsers className="text-red-600"></FaUsers></button>}
                                      </td>
                                     <td><button onClick={() => handleDeleteUser(user)} className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600"></FaTrashAlt></button></td>
                                 </tr>)
