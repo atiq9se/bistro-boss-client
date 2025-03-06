@@ -18,7 +18,7 @@ const Dashboard = () => {
                     <li> <NavLink to="/dashboard/cart"><FaShoppingCart></FaShoppingCart> My Cart{cart.length}</NavLink></li>
                     <li> <NavLink to="/dashboard/adminHome"><FaAd></FaAd> Admin Home</NavLink></li>
                     <li> <NavLink to="/dashboard/addItems"><FaList></FaList> Add items</NavLink></li>
-                    <li> <NavLink to="/dashboard/manage"><FaList></FaList>Manage Items</NavLink></li>
+                    <li> <NavLink to="/dashboard/manageItems"><FaList></FaList>Manage Items</NavLink></li>
                     <li> <NavLink to="/dashboard/manage"><FaList></FaList>Manage booking</NavLink></li>
                     <li> <NavLink to="/dashboard/users"><FaUser></FaUser>All users</NavLink></li>
                     <div className="divider"></div>
