@@ -5,9 +5,11 @@ import { CiShoppingCart } from "react-icons/ci";
 import useCart from "../../hooks/useCart";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
+    const {isAdmin} = useAdmin();
     const [cart] = useCart();
 
     const handleSignOut = () => {
@@ -39,6 +41,16 @@ const Navbar = () => {
         <li><Link to='/menu'>Our Menu</Link></li>
         <li><Link to='/order/salad'>Order Food</Link></li>
         <li><Link to='/secret'>Secret</Link></li>
+        {
+            //user ? 'true': 'false'
+            //user ? condition ? 'double true' : 'one true' : 'false'
+        }
+        {
+            user && isAdmin && <li><Link to='/dashboard/adminHome'>Dashboard</Link></li>
+        }
+        {
+            user && !isAdmin && <li><Link to='/dashboard/userHome'>Dashboard</Link></li>
+        }
         <li>
             <Link to="/dashboard/cart">
                 <button className="btn">
